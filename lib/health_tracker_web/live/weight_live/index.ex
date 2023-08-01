@@ -4,6 +4,8 @@ defmodule HealthTrackerWeb.WeightLive.Index do
   alias HealthTracker.HealthStats
   alias HealthTracker.HealthStats.Weight
 
+  on_mount HealthTrackerWeb.UserLiveAuth
+
   @impl true
   def mount(_params, _session, socket) do
     {:ok, stream(socket, :weights, HealthStats.list_weights())}
