@@ -2,6 +2,7 @@ defmodule HealthTrackerWeb.WeightLive.FormComponent do
   use HealthTrackerWeb, :live_component
 
   alias HealthTracker.HealthStats
+  on_mount HealthTrackerWeb.UserLiveAuth
 
   @impl true
   def render(assigns) do
