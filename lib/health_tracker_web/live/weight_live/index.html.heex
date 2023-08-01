@@ -1,0 +1,41 @@
+<.header>
+  Listing Weights
+  <:actions>
+    <.link patch={~p"/weights/new"}>
+      <.button>New Weight</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="weights"
+  rows={@streams.weights}
+  row_click={fn {_id, weight} -> JS.navigate(~p"/weights/#{weight}") end}
+>
+  <:col :let={{_id, weight}} label="Weight"><%= weight.weight %></:col>
+  <:action :let={{_id, weight}}>
+    <div class="sr-only">
+      <.link navigate={~p"/weights/#{weight}"}>Show</.link>
+    </div>
+    <.link patch={~p"/weights/#{weight}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, weight}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: weight.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="weight-modal" show on_cancel={JS.patch(~p"/weights")}>
+  <.live_component
+    module={HealthTrackerWeb.WeightLive.FormComponent}
+    id={@weight.id || :new}
+    title={@page_title}
+    action={@live_action}
+    weight={@weight}
+    patch={~p"/weights"}
+  />
+</.modal>

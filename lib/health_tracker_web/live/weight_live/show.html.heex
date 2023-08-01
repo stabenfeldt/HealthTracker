@@ -1,0 +1,26 @@
+<.header>
+  Weight <%= @weight.id %>
+  <:subtitle>This is a weight record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/weights/#{@weight}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit weight</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Weight"><%= @weight.weight %></:item>
+</.list>
+
+<.back navigate={~p"/weights"}>Back to weights</.back>
+
+<.modal :if={@live_action == :edit} id="weight-modal" show on_cancel={JS.patch(~p"/weights/#{@weight}")}>
+  <.live_component
+    module={HealthTrackerWeb.WeightLive.FormComponent}
+    id={@weight.id}
+    title={@page_title}
+    action={@live_action}
+    weight={@weight}
+    patch={~p"/weights/#{@weight}"}
+  />
+</.modal>
