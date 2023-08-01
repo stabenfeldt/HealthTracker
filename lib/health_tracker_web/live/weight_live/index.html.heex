@@ -29,13 +29,19 @@
   </:action>
 </.table>
 
-<.modal :if={@live_action in [:new, :edit]} id="weight-modal" show on_cancel={JS.patch(~p"/weights")}>
+<.modal
+  :if={@live_action in [:new, :edit]}
+  id="weight-modal"
+  show
+  on_cancel={JS.patch(~p"/weights")}
+>
   <.live_component
     module={HealthTrackerWeb.WeightLive.FormComponent}
     id={@weight.id || :new}
     title={@page_title}
     action={@live_action}
     weight={@weight}
+    current_user={@current_user}
     patch={~p"/weights"}
   />
 </.modal>
