@@ -2,9 +2,16 @@ defmodule HealthTracker.AccountsTest do
   use HealthTracker.DataCase
 
   alias HealthTracker.Accounts
+  alias HealthTracker.Factory
 
   import HealthTracker.AccountsFixtures
   alias HealthTracker.Accounts.{User, UserToken}
+
+  describe "Created by the factory" do
+    test "is valid" do
+      assert %User{} = Factory.build(:user)
+    end
+  end
 
   describe "get_user_by_email/1" do
     test "does not return the user if the email does not exist" do
