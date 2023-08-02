@@ -50,6 +50,9 @@ defmodule HealthTrackerWeb.WeightLive.FormComponent do
   end
 
   def handle_event("save", %{"weight" => weight_params}, socket) do
+    IO.puts("\n\n  SAVE\n\n  ")
+    IO.inspect(socket)
+    IO.puts("current_user ID: #{socket.assigns.current_user.id}")
     save_weight(socket, socket.assigns.action, weight_params)
   end
 
