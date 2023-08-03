@@ -1,5 +1,8 @@
 defmodule HealthTrackerWeb.PageControllerTest do
   use HealthTracker.FeatureCase, async: true
+  import Wallaby.Browser
+  alias HealthTracker.Factory
+
   defp sign_in(session, as: user) do
     session
     |> visit("/")
@@ -15,5 +18,15 @@ defmodule HealthTrackerWeb.PageControllerTest do
     session
     |> visit("/")
     |> assert_has(Query.css(".tracking-tighter", text: "Peace of mind"))
+  end
+
+  # Test a protected page
+  test "GET /weights", %{session: session} do
+    user = Factory.insert(:user, email: "user@example.com")
+
+    session
+    |> sign_in(as: user)
+    |> visit("/weights")
+    |> assert_has(Query.css("h1", text: "Listing Weights"))
   end
 end
