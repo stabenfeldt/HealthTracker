@@ -1,8 +1,9 @@
 defmodule HealthTrackerWeb.PageControllerTest do
-  use HealthTrackerWeb.ConnCase
+  use HealthTracker.FeatureCase, async: true
 
-  test "GET /", %{conn: conn} do
-    conn = get(conn, ~p"/")
-    assert html_response(conn, 200) =~ "Peace of mind from prototype to production"
+  test "user can visit homepage", %{session: session} do
+    session
+    |> visit("/")
+    |> assert_has(Query.css(".tracking-tighter", text: "Peace of mind"))
   end
 end
