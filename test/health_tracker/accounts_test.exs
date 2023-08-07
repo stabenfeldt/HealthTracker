@@ -1,15 +1,17 @@
 defmodule HealthTracker.AccountsTest do
   use HealthTracker.DataCase
 
-  alias HealthTracker.Accounts
   alias HealthTracker.Factory
-
-  import HealthTracker.AccountsFixtures
+  alias HealthTracker.Accounts
   alias HealthTracker.Accounts.{User, UserToken}
 
-  describe "Created by the factory" do
-    test "is valid" do
-      assert %User{} = Factory.build(:user)
+  import HealthTracker.AccountsFixtures
+
+  describe "users" do
+    test "has a valid changeset" do
+      new_user = Factory.params_for(:user)
+      changeset = User.registration_changeset(%User{}, new_user)
+      assert changeset.valid?
     end
   end
 
