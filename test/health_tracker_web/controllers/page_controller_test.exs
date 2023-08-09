@@ -3,7 +3,15 @@ defmodule HealthTrackerWeb.PageControllerTest do
   import Wallaby.Browser
   alias HealthTracker.Factory
 
+  # Setup a user account once before running any tests
+  setup_all do
+    user = Factory.insert(:user)
+    {:ok, %{user: user}}
+  end
   defp sign_in(session, as: user) do
+    IO.puts("Signing in as #{user.email}")
+    IO.puts("Signing in with password #{user.password}")
+
     session
     |> visit("/")
     |> click(Query.link("Log in"))
@@ -11,7 +19,7 @@ defmodule HealthTrackerWeb.PageControllerTest do
     |> fill_in(Query.text_field("Password"), with: user.password)
     |> click(Query.button("Sign in"))
     |> take_screenshot(name: "sign_in")
-    |> assert_has(Query.css(".current_user", text: "user@example.com"))
+    |> assert_has(Query.css(".current_user", text: user.email))
   end
 
   test "user can visit homepage", %{session: session} do
@@ -22,7 +30,7 @@ defmodule HealthTrackerWeb.PageControllerTest do
 
   # Test a protected page
   test "GET /weights", %{session: session} do
-    user = Factory.insert(:user, email: "user@example.com")
+    user = Factory.insert(:user)
 
     session
     |> sign_in(as: user)
