@@ -3,7 +3,8 @@ defmodule HealthTrackerWeb.WeightLiveTest do
 
   import Phoenix.LiveViewTest
   import HealthTracker.HealthStatsFixtures
-  import Wallaby.Browser
+  alias HealthTracker.Factory
+  # import Wallaby.Browser
 
   @create_attrs %{weight: 120.5}
   @update_attrs %{weight: 456.7}
@@ -14,21 +15,23 @@ defmodule HealthTrackerWeb.WeightLiveTest do
     %{weight: weight}
   end
 
-  defp sign_in(session, as: user) do
-    session
-    |> visit("/")
-    |> click(Query.link("Log in"))
-    |> fill_in(Query.text_field("Email"), with: user.email)
-    |> fill_in(Query.text_field("Password"), with: user.password)
-    |> click(Query.button("Sign in"))
-    |> take_screenshot(name: "sign_in")
-    |> assert_has(Query.css(".current_user", text: "user@example.com"))
-  end
+  # defp sign_in(session, as: user) do
+  #  session
+  #  |> visit("/")
+  #  |> click(Query.link("Log in"))
+  #  |> fill_in(Query.text_field("Email"), with: user.email)
+  #  |> fill_in(Query.text_field("Password"), with: user.password)
+  #  |> click(Query.button("Sign in"))
+  #  |> take_screenshot(name: "sign_in")
+  #  |> assert_has(Query.css(".current_user", text: "user@example.com"))
+  # end
 
   describe "Index" do
     setup [:create_weight]
 
     test "lists all weights", %{conn: conn} do
+      user = Factory.insert(:user)
+      IO.inspect(user)
       {:ok, _index_live, html} = live(conn, ~p"/weights")
 
       assert html =~ "Listing Weights"
