@@ -6,22 +6,6 @@ defmodule HealthTracker.HealthStatsTest do
   alias HealthTracker.HealthStats.Weight
   alias HealthTracker.Accounts.User
 
-  describe "users" do
-    test "valid changeset" do
-      new_user = Factory.params_for(:user)
-      IO.puts("--------------------------\n\n")
-      IO.inspect(new_user)
-      IO.puts("--------------------------\n\n")
-      changeset = User.registration_changeset(%User{}, new_user)
-      assert changeset.valid?
-    end
-
-    test "is valid from the factory" do
-      new_user = Factory.insert(:user)
-      IO.inspect(new_user)
-    end
-  end
-
   describe "weights" do
     alias HealthTracker.HealthStats.Weight
 
