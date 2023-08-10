@@ -4,8 +4,8 @@ defmodule HealthTracker.Factory do
   def user_factory do
     %HealthTracker.Accounts.User{
       email: sequence(:email, &"email-#{&1}@example.com"),
-      password: sequence(:email, &"email-#{&1}@example.com"),
-      hashed_password: "password"
+      password: "topsecret",
+      hashed_password: Bcrypt.hash_pwd_salt("topsecret")
     }
   end
 
