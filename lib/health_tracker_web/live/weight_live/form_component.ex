@@ -50,14 +50,26 @@ defmodule HealthTrackerWeb.WeightLive.FormComponent do
   end
 
   def handle_event("save", %{"weight" => weight_params}, socket) do
+    current_user_id = socket.assigns.current_user.id
+
+    weight_params_with_user_id =
+      weight_params
+      |> Map.put(:user_id, current_user_id)
+
     IO.puts("\n\n  SAVE\n\n  ")
-    IO.inspect(socket)
     IO.puts("current_user ID: #{socket.assigns.current_user.id}")
-    save_weight(socket, socket.assigns.action, weight_params)
+
+    save_weight(socket, socket.assigns.action, weight_params_with_user_id)
   end
 
-  defp save_weight(socket, :edit, weight_params) do
-    case HealthStats.update_weight(socket.assigns.weight, weight_params) do
+  defp save_weight(socket, :edit, weight_params_with_user_id, _current_user_id) do
+    IO.inspect(weight_params_with_user_id, label: "weight_params_with_user_id")
+    IO.inspect(weight_params_with_user_id, label: "socket.assigns.weight")
+
+    case HealthStats.update_weight(
+           socket.assigns.weight,
+           weight_params_with_user_id
+         ) do
       {:ok, weight} ->
         notify_parent({:saved, weight})
 
@@ -71,8 +83,12 @@ defmodule HealthTrackerWeb.WeightLive.FormComponent do
     end
   end
 
-  defp save_weight(socket, :new, weight_params) do
-    case HealthStats.create_weight(weight_params) do
+  # defp save_weight(socket, :new, weight_params, current_user_id) do
+  defp save_weight(socket, :new, weight_params_with_user_id) do
+    IO.puts("\n\n  SAVE >defp save_weight< \n\n  ")
+    IO.inspect(weight_params_with_user_id, label: "weight_params_with_user_id")
+
+    case HealthStats.create_weight(weight_params_with_user_id) do
       {:ok, weight} ->
         notify_parent({:saved, weight})
 

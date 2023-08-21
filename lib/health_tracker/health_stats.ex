@@ -70,6 +70,7 @@ defmodule HealthTracker.HealthStats do
 
   """
   def update_weight(%Weight{} = weight, attrs) do
+    # |> Map.put(:user_id, current_user_id)
     weight
     |> Weight.changeset(attrs)
     |> Repo.update()
