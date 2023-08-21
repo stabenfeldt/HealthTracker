@@ -3,7 +3,7 @@ defmodule HealthTracker.Factory do
 
   def user_factory do
     %HealthTracker.Accounts.User{
-      email: sequence(:email, &"email-#{&1}@example.com"),
+      email: Faker.Internet.email(),
       password: "topsecret",
       hashed_password: Bcrypt.hash_pwd_salt("topsecret")
     }
@@ -12,12 +12,10 @@ defmodule HealthTracker.Factory do
   def weight_factory do
     user = insert(:user)
     IO.puts("weight_factory")
-    # IO.puts("user: #{inspect(user)}")
 
     %HealthTracker.HealthStats.Weight{
       weight: sequence(:weight, & &1),
-      user_id: 1
-      # date: sequence(:date, & &1)
+      user_id: user.id
     }
   end
 end
