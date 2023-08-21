@@ -49,8 +49,10 @@ defmodule HealthTracker.HealthStats do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_weight(attrs \\ %{}) do
+
+  def create_weight(user_id, attrs \\ %{}) do
     %Weight{}
+    |> Map.put(:user_id, user_id)
     |> Weight.changeset(attrs)
     |> Repo.insert()
   end
