@@ -37,7 +37,7 @@ defmodule HealthTracker.MixProject do
       {:ecto_sql, "~> 3.10"},
       {:esbuild, "~> 0.7", runtime: Mix.env() == :dev},
       {:ex_machina, "~> 2.7.0", only: :test},
-      {:faker, "~> 0.16", only: :test},
+      {:faker, "~> 0.17", only: :test},
       {:finch, "~> 0.13"},
       {:floki, ">= 0.30.0", only: :test},
       {:gettext, "~> 0.20"},
