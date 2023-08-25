@@ -5,7 +5,6 @@ defmodule HealthTracker.HealthStats.Weight do
   schema "weights" do
     field :weight, :float
     field :user_id, :id
-    # TODO: Add date field
 
     timestamps()
   end

@@ -11,6 +11,7 @@ defmodule HealthTracker.AccountsTest do
     test "has a valid changeset" do
       new_user = Factory.params_for(:user)
       changeset = User.registration_changeset(%User{}, new_user)
+      IO.inspect(changeset)
       assert changeset.valid?
     end
   end

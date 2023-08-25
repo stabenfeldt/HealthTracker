@@ -20,12 +20,12 @@ defmodule HealthTracker.HealthStatsTest do
     end
 
     test "list_weights/0 returns all weights" do
-      weight = weight_fixture()
+      weight = Factory.insert(:weight)
       assert HealthStats.list_weights() == [weight]
     end
 
     test "get_weight!/1 returns the weight with given id" do
-      weight = weight_fixture()
+      weight = Factory.insert(:weight)
       assert HealthStats.get_weight!(weight.id) == weight
     end
 
@@ -43,7 +43,7 @@ defmodule HealthTracker.HealthStatsTest do
     end
 
     test "update_weight/2 with valid data updates the weight" do
-      weight = weight_fixture()
+      weight = Factory.insert(:weight)
       update_attrs = %{weight: 456.7}
 
       assert {:ok, %Weight{} = weight} = HealthStats.update_weight(weight, update_attrs)
@@ -51,25 +51,21 @@ defmodule HealthTracker.HealthStatsTest do
     end
 
     test "update_weight/2 with invalid data returns error changeset" do
-      # weight = weight_fixture()
       user = Factory.insert(:user)
-      IO.puts("--------------------------\n\n")
-      IO.puts("user\n\n")
-      IO.inspect(user)
-      IO.puts("--------------------------\n\n")
+      weight = Factory.insert(:weight)
       weight = Factory.insert(:weight, user_id: user.id)
       assert {:error, %Ecto.Changeset{}} = HealthStats.update_weight(weight, @invalid_attrs)
       assert weight == HealthStats.get_weight!(weight.id)
     end
 
     test "delete_weight/1 deletes the weight" do
-      weight = weight_fixture()
+      weight = Factory.insert(:weight)
       assert {:ok, %Weight{}} = HealthStats.delete_weight(weight)
       assert_raise Ecto.NoResultsError, fn -> HealthStats.get_weight!(weight.id) end
     end
 
     test "change_weight/1 returns a weight changeset" do
-      weight = weight_fixture()
+      weight = Factory.insert(:weight)
       assert %Ecto.Changeset{} = HealthStats.change_weight(weight)
     end
   end
