@@ -13,10 +13,9 @@ defmodule HealthTracker.Factory do
 
   def weight_factory do
     user = insert(:user)
-    IO.puts("weight_factory")
 
     %HealthTracker.HealthStats.Weight{
-      weight: sequence(:weight, & &1),
+      weight: 100,
       user_id: user.id
     }
   end
