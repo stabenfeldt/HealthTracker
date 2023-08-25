@@ -2,10 +2,12 @@ defmodule HealthTracker.Factory do
   use ExMachina.Ecto, repo: HealthTracker.Repo
 
   def user_factory do
+    password = "top-secret-123"
+
     %HealthTracker.Accounts.User{
       email: Faker.Internet.email(),
-      password: "topsecret",
-      hashed_password: Bcrypt.hash_pwd_salt("topsecret")
+      password: password,
+      hashed_password: Bcrypt.hash_pwd_salt(password)
     }
   end
 
