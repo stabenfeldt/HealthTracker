@@ -54,6 +54,7 @@ defmodule HealthTrackerWeb do
       use Phoenix.LiveView,
         layout: {HealthTrackerWeb.Layouts, :app}
 
+      on_mount HealthTrackerWeb.UserLiveAuth
       unquote(html_helpers())
     end
   end
@@ -104,9 +105,10 @@ defmodule HealthTrackerWeb do
     end
   end
 
-  @doc """
+  """
   When used, dispatch to the appropriate controller/view/etc.
   """
+
   defmacro __using__(which) when is_atom(which) do
     apply(__MODULE__, which, [])
   end
