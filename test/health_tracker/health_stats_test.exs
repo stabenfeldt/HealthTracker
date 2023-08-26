@@ -33,13 +33,13 @@ defmodule HealthTracker.HealthStatsTest do
       user = Factory.insert(:user)
       valid_attrs = %{weight: 120.5, user_id: user.id}
 
-      assert {:ok, %Weight{} = weight} = HealthStats.create_weight(user.id, valid_attrs)
+      assert {:ok, %Weight{} = weight} = HealthStats.create_weight(valid_attrs)
       assert weight.weight == 120.5
     end
 
     test "create_weight/1 with invalid data returns error changeset" do
       user = Factory.insert(:user)
-      assert {:error, %Ecto.Changeset{}} = HealthStats.create_weight(user.id, @invalid_attrs)
+      assert {:error, %Ecto.Changeset{}} = HealthStats.create_weight(@invalid_attrs)
     end
 
     test "update_weight/2 with valid data updates the weight" do
