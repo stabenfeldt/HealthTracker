@@ -2,7 +2,6 @@ defmodule HealthTrackerWeb.WeightLive.FormComponent do
   use HealthTrackerWeb, :live_component
 
   alias HealthTracker.HealthStats
-  alias HealthTracker.HealthStats.Weight
   alias HealthTracker.Converter
 
   @impl true
@@ -51,11 +50,19 @@ defmodule HealthTrackerWeb.WeightLive.FormComponent do
   end
 
   def handle_event("save", %{"weight" => weight_params}, socket) do
+    IO.puts("from show edit")
+
+    IO.puts("socket: \n\n")
+    IO.inspect(socket)
     current_user_id = socket.assigns.current_user.id
+    IO.puts("current_user_id #{current_user_id} \n\n")
     weight = weight_params["weight"]
     weight = Converter.to_float(weight)
 
+    IO.puts("\n-----------------------------------------------------------")
     weight_params_with_user_id = %{weight: weight, user_id: current_user_id}
+    IO.inspect(weight_params_with_user_id)
+    IO.puts("-----------------------------------------------------------\n\n")
     save_weight(socket, socket.assigns.action, weight_params_with_user_id)
   end
 

@@ -3,7 +3,6 @@ defmodule HealthTrackerWeb.WeightLive.Index do
 
   alias HealthTracker.HealthStats
   alias HealthTracker.HealthStats.Weight
-
   on_mount HealthTrackerWeb.UserLiveAuth
 
   @impl true
