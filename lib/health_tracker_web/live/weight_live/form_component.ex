@@ -3,7 +3,6 @@ defmodule HealthTrackerWeb.WeightLive.FormComponent do
 
   alias HealthTracker.HealthStats
   alias HealthTracker.HealthStats.Weight
-  on_mount HealthTrackerWeb.UserLiveAuth
   alias HealthTracker.Converter
 
   @impl true
