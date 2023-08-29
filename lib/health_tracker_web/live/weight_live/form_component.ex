@@ -3,6 +3,7 @@ defmodule HealthTrackerWeb.WeightLive.FormComponent do
 
   alias HealthTracker.HealthStats
   alias HealthTracker.Converter
+  on_mount HealthTrackerWeb.UserLiveAuth
 
   @impl true
   def render(assigns) do
@@ -31,6 +32,8 @@ defmodule HealthTrackerWeb.WeightLive.FormComponent do
 
   @impl true
   def update(%{weight: weight} = assigns, socket) do
+    IO.puts("from update\n\n")
+    IO.inspect(assigns)
     changeset = HealthStats.change_weight(weight)
 
     {:ok,
@@ -50,6 +53,7 @@ defmodule HealthTrackerWeb.WeightLive.FormComponent do
   end
 
   def handle_event("save", %{"weight" => weight_params}, socket) do
+    HealthTrackerWeb.UserLiveAuth
     IO.puts("from show edit")
 
     IO.puts("socket: \n\n")

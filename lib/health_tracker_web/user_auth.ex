@@ -148,7 +148,10 @@ defmodule HealthTrackerWeb.UserAuth do
   end
 
   def on_mount(:ensure_authenticated, _params, session, socket) do
+    IO.puts("ensure_authenticated #2")
     socket = mount_current_user(socket, session)
+    IO.puts("from UserAuth. socket.assigns.current_user: \n\n")
+    IO.inspect(socket.assigns.current_user)
 
     if socket.assigns.current_user do
       {:cont, socket}

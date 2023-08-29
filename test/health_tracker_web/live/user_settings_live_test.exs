@@ -4,12 +4,14 @@ defmodule HealthTrackerWeb.UserSettingsLiveTest do
   alias HealthTracker.Accounts
   import Phoenix.LiveViewTest
   import HealthTracker.AccountsFixtures
+  alias HealthTracker.Factory
 
   describe "Settings page" do
     test "renders settings page", %{conn: conn} do
       {:ok, _lv, html} =
         conn
-        |> log_in_user(user_fixture())
+        |> log_in_user(Factory.insert(:user))
+        # |> log_in_user(user_fixture())
         |> live(~p"/users/settings")
 
       assert html =~ "Change Email"
@@ -70,6 +72,7 @@ defmodule HealthTrackerWeb.UserSettingsLiveTest do
 
       result =
         lv
+        |> log_in_user(Factory.insert(:user))
         |> form("#email_form", %{
           "current_password" => "invalid",
           "user" => %{"email" => user.email}

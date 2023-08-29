@@ -54,7 +54,7 @@ defmodule HealthTrackerWeb do
       use Phoenix.LiveView,
         layout: {HealthTrackerWeb.Layouts, :app}
 
-      on_mount HealthTrackerWeb.UserLiveAuth
+      # on_mount HealthTrackerWeb.UserLiveAuth
       unquote(html_helpers())
     end
   end

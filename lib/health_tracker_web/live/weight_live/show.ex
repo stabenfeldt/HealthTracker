@@ -2,6 +2,7 @@ defmodule HealthTrackerWeb.WeightLive.Show do
   use HealthTrackerWeb, :live_view
 
   alias HealthTracker.HealthStats
+  on_mount HealthTrackerWeb.UserLiveAuth
 
   @impl true
   def mount(_params, _session, socket) do
