@@ -14,7 +14,12 @@
 
 <.back navigate={~p"/weights"}>Back to weights</.back>
 
-<.modal :if={@live_action == :edit} id="weight-modal" show on_cancel={JS.patch(~p"/weights/#{@weight}")}>
+<.modal
+  :if={@live_action == :edit}
+  id="weight-modal"
+  show
+  on_cancel={JS.patch(~p"/weights/#{@weight}")}
+>
   <.live_component
     module={HealthTrackerWeb.WeightLive.FormComponent}
     id={@weight.id}
