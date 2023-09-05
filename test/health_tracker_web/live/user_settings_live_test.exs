@@ -11,7 +11,6 @@ defmodule HealthTrackerWeb.UserSettingsLiveTest do
       {:ok, _lv, html} =
         conn
         |> log_in_user(Factory.insert(:user))
-        # |> log_in_user(user_fixture())
         |> live(~p"/users/settings")
 
       assert html =~ "Change Email"
