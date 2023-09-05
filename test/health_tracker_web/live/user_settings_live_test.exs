@@ -69,9 +69,11 @@ defmodule HealthTrackerWeb.UserSettingsLiveTest do
     test "renders errors with invalid data (phx-submit)", %{conn: conn, user: user} do
       {:ok, lv, _html} = live(conn, ~p"/users/settings")
 
+      conn
+      |> log_in_user(Factory.insert(:user))
+
       result =
         lv
-        |> log_in_user(Factory.insert(:user))
         |> form("#email_form", %{
           "current_password" => "invalid",
           "user" => %{"email" => user.email}
