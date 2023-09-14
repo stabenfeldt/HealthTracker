@@ -73,6 +73,7 @@ defmodule HealthTrackerWeb.Router do
       live "/weights/new", WeightLive.Index, :new
       live "/weights/:id/edit", WeightLive.Index, :edit
 
+      live "/weights/stats", WeightLive.Stats
       live "/weights/:id", WeightLive.Show, :show
       live "/weights/:id/show/edit", WeightLive.Show, :edit
     end
