@@ -4,7 +4,8 @@ let Hooks = {}
 
 Hooks.LineChart = {
   mounted() {
-    this.chart = new LineChart(this.el, [], []);
+    const {labels, values} = JSON.parse(this.el.dataset.chartData);
+    this.chart = new LineChart(this.el, labels, values);
   }
 }
 
