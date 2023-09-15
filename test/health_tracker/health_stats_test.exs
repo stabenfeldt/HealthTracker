@@ -68,5 +68,13 @@ defmodule HealthTracker.HealthStatsTest do
       weight = Factory.insert(:weight)
       assert %Ecto.Changeset{} = HealthStats.change_weight(weight)
     end
+    test "get_weight_values_for_user/1 returns all weights for a user" do
+      user = Factory.insert(:user)
+      weight = Factory.insert(:weight, user_id: user.id, weight: 80.4)
+      weight = Factory.insert(:weight, user_id: user.id, weight: 81.4)
+      weight = Factory.insert(:weight, user_id: user.id, weight: 82.4)
+
+      assert HealthStats.Weight.get_weight_values_for_user(user.id) == [80.4, 81.4, 82.4]
+    end
   end
 end
