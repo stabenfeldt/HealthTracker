@@ -54,6 +54,7 @@ defmodule HealthTracker.MixProject do
       {:tailwind, "~> 0.2.0", runtime: Mix.env() == :dev},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
+      {:timex, "~> 3.7"},
       {:wallaby, "~> 0.30.5", [runtime: false, only: :test]}
     ]
   end
