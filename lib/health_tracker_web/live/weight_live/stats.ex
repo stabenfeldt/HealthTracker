@@ -32,7 +32,9 @@ defmodule HealthTrackerWeb.WeightLive.Stats do
     <div id="stats">
       <h1>Stats</h1>
       <canvas id="health-stats"
-              phx-hook="LineChart">
+              phx-hook="LineChart"
+              data-chart-data="<%= Jason.encode!(@chart_data) %>"
+      >
       </canvas>
     </div>
     """
