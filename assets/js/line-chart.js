@@ -21,18 +21,18 @@ class LineChart {
           xAxes: [
             {
               ticks: {
-                fontStyle: "bold",
-                fontSize: 14,
+                // fontStyle: "bold",
+                // fontSize: 14,
               },
             },
           ],
           yAxes: [
             {
               ticks: {
-                suggestedMin: 50,
-                suggestedMax: 200,
-                fontStyle: "bold",
-                fontSize: 14,
+                // suggestedMin: 50,
+                // suggestedMax: 200,
+                // fontStyle: "bold",
+                // fontSize: 14,
               },
             },
           ],
