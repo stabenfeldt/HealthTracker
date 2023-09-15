@@ -1,6 +1,7 @@
 defmodule HealthTrackerWeb.WeightLive.Stats do
   use HealthTrackerWeb, :live_view
   alias HealthTracker.DateUtils
+  alias HealthTracker.HealthStats.Weight
 
   on_mount HealthTrackerWeb.UserLiveAuth
 
@@ -10,8 +11,8 @@ defmodule HealthTrackerWeb.WeightLive.Stats do
     labels = get_timeline()
 
     # Values goes on the Y-graph.
-    # Enum.map(labels, fn _ -> get_timeline(:weeks) end)
-    values = get_weight_values_for_user(current_user(socket))
+    current_user = socket.assigns.current_user
+    values = Weight.get_weight_values_for_user(current_user.id)
 
     {:ok,
      assign(socket,
