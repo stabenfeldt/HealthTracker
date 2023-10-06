@@ -16,6 +16,7 @@ defmodule HealthTracker.Factory do
 
     %HealthTracker.HealthStats.Weight{
       weight: 100,
+      date: Date.utc_today(),
       user_id: user.id
     }
   end
