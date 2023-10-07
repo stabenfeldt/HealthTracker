@@ -22,6 +22,7 @@ defmodule HealthTrackerWeb.WeightLive.FormComponent do
         phx-submit="save"
       >
         <.input field={@form[:weight]} type="number" label="Weight" step="any" />
+        <.input field={@form[:date]} type="date" label="Date" step="any" value={@todays_date} />
         <:actions>
           <.button phx-disable-with="Saving...">Save Weight</.button>
         </:actions>
@@ -56,7 +57,14 @@ defmodule HealthTrackerWeb.WeightLive.FormComponent do
     weight = weight_params["weight"]
     weight = Converter.to_float(weight)
 
-    weight_params_with_user_id = %{weight: weight, user_id: current_user_id}
+    date = weight_params["date"]
+
+    weight_params_with_user_id = %{
+      weight: weight,
+      user_id: current_user_id,
+      date: date
+    }
+
     save_weight(socket, socket.assigns.action, weight_params_with_user_id)
   end
 
