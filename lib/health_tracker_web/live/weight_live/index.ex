@@ -16,15 +16,21 @@ defmodule HealthTrackerWeb.WeightLive.Index do
   end
 
   defp apply_action(socket, :edit, %{"id" => id}) do
+    todays_date = Date.to_iso8601(Date.utc_today())
+
     socket
     |> assign(:page_title, "Edit Weight")
     |> assign(:weight, HealthStats.get_weight!(id))
+    |> assign(:todays_date, todays_date)
   end
 
   defp apply_action(socket, :new, _params) do
+    todays_date = Date.to_iso8601(Date.utc_today())
+
     socket
     |> assign(:page_title, "New Weight")
     |> assign(:weight, %Weight{})
+    |> assign(:todays_date, todays_date)
   end
 
   defp apply_action(socket, :index, _params) do
