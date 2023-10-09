@@ -6,7 +6,14 @@ defmodule HealthTrackerWeb.WeightLive.Show do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, socket}
+    todays_date = Date.to_iso8601(Date.utc_today())
+
+    if socket.assigns.live_action == :show do
+      # Assign today's date to the socket
+      {:ok, assign(socket, todays_date: todays_date)}
+    else
+      {:ok, socket}
+    end
   end
 
   @impl true
@@ -14,7 +21,8 @@ defmodule HealthTrackerWeb.WeightLive.Show do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:weight, HealthStats.get_weight!(id))}
+     |> assign(:weight, HealthStats.get_weight!(id))
+     |> assign(:todays_date, Date.utc_today())}
   end
 
   defp page_title(:show), do: "Show Weight"

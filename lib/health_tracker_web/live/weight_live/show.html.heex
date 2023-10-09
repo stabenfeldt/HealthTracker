@@ -10,6 +10,7 @@
 
 <.list>
   <:item title="Weight"><%= @weight.weight %></:item>
+  <:item title="Date"><%= @weight.date %></:item>
 </.list>
 
 <.back navigate={~p"/weights"}>Back to weights</.back>
@@ -27,6 +28,7 @@
     current_user={@current_user}
     action={@live_action}
     weight={@weight}
+    date={@weight.date || @todays_date}
     patch={~p"/weights/#{@weight}"}
   />
 </.modal>

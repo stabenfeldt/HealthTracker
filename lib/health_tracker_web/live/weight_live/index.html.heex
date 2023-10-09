@@ -13,6 +13,7 @@
   row_click={fn {_id, weight} -> JS.navigate(~p"/weights/#{weight}") end}
 >
   <:col :let={{_id, weight}} label="Weight"><%= weight.weight %></:col>
+  <:col :let={{_id, weight}} label="Date"><%= weight.date %></:col>
   <:action :let={{_id, weight}}>
     <div class="sr-only">
       <.link navigate={~p"/weights/#{weight}"}>Show</.link>
@@ -42,6 +43,7 @@
     action={@live_action}
     weight={@weight}
     current_user={@current_user}
+    date={@weight.date || @todays_date}
     patch={~p"/weights"}
   />
 </.modal>

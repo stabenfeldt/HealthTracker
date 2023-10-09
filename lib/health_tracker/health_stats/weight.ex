@@ -7,6 +7,7 @@ defmodule HealthTracker.HealthStats.Weight do
   schema "weights" do
     field :weight, :float
     field :user_id, :id
+    field :date, :date
 
     timestamps()
   end
@@ -14,8 +15,8 @@ defmodule HealthTracker.HealthStats.Weight do
   @doc false
   def changeset(weight, attrs) do
     weight
-    |> cast(attrs, [:weight, :user_id])
-    |> validate_required([:weight, :user_id])
+    |> cast(attrs, [:weight, :user_id, :date])
+    |> validate_required([:weight, :user_id, :date])
   end
 
   def get_weight_values_for_user(user_id) do

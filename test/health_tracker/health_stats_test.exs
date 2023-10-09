@@ -16,7 +16,7 @@ defmodule HealthTracker.HealthStatsTest do
     test "is valid from the factory" do
       new_weight = Factory.params_for(:weight)
       changeset = Weight.changeset(%Weight{}, new_weight)
-      assert changeset.valid?
+      assert changeset.valid? || (IO.inspect(changeset.errors) && false)
     end
 
     test "list_weights/0 returns all weights" do
@@ -31,7 +31,7 @@ defmodule HealthTracker.HealthStatsTest do
 
     test "create_weight/1 with valid data creates a weight" do
       user = Factory.insert(:user)
-      valid_attrs = %{weight: 120.5, user_id: user.id}
+      valid_attrs = %{weight: 120.5, user_id: user.id, date: ~D[2018-01-01]}
 
       assert {:ok, %Weight{} = weight} = HealthStats.create_weight(valid_attrs)
       assert weight.weight == 120.5
@@ -68,6 +68,7 @@ defmodule HealthTracker.HealthStatsTest do
       weight = Factory.insert(:weight)
       assert %Ecto.Changeset{} = HealthStats.change_weight(weight)
     end
+
     test "get_weight_values_for_user/1 returns all weights for a user" do
       user = Factory.insert(:user)
       weight = Factory.insert(:weight, user_id: user.id, weight: 80.4)
