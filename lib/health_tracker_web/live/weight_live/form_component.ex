@@ -22,7 +22,7 @@ defmodule HealthTrackerWeb.WeightLive.FormComponent do
         phx-submit="save"
       >
         <.input field={@form[:weight]} type="number" label="Weight" step="any" />
-        <.input field={@form[:date]} type="date" label="Date" step="any" value={@todays_date} />
+        <.input field={@form[:date]} type="date" label="Date" step="any" value={@date} />
         <:actions>
           <.button phx-disable-with="Saving...">Save Weight</.button>
         </:actions>

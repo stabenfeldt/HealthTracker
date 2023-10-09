@@ -28,6 +28,7 @@
     current_user={@current_user}
     action={@live_action}
     weight={@weight}
+    date={@weight.date || @todays_date}
     patch={~p"/weights/#{@weight}"}
   />
 </.modal>

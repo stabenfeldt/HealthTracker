@@ -16,7 +16,7 @@ defmodule HealthTracker.HealthStatsTest do
     test "is valid from the factory" do
       new_weight = Factory.params_for(:weight)
       changeset = Weight.changeset(%Weight{}, new_weight)
-      assert changeset.valid?
+      assert changeset.valid? || (IO.inspect(changeset.errors) && false)
     end
 
     test "list_weights/0 returns all weights" do
