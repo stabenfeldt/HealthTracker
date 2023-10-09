@@ -31,7 +31,7 @@ defmodule HealthTracker.HealthStatsTest do
 
     test "create_weight/1 with valid data creates a weight" do
       user = Factory.insert(:user)
-      valid_attrs = %{weight: 120.5, user_id: user.id}
+      valid_attrs = %{weight: 120.5, user_id: user.id, date: ~D[2018-01-01]}
 
       assert {:ok, %Weight{} = weight} = HealthStats.create_weight(valid_attrs)
       assert weight.weight == 120.5
